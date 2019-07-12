@@ -1,0 +1,14 @@
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\UnitTest_201810.dll
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\UnitTest_201810.pdb
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\nunit.framework.dll
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\nunit.framework.pdb
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\nunit.framework.xml
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\obj\Debug\UnitTest_201810.csprojAssemblyReference.cache
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\obj\Debug\UnitTest_201810.csproj.CoreCompileInputs.cache
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\obj\Debug\UnitTest_201810.csproj.CopyComplete
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\obj\Debug\UnitTest_201810.dll
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\obj\Debug\UnitTest_201810.pdb
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\LC201810.dll
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\LCCommon.dll
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\LC201810.pdb
+D:\01.Projects\LeetCodeRepos\UnitTest_201810\bin\Debug\LCCommon.pdb

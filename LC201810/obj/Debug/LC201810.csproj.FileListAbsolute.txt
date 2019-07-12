@@ -1,0 +1,9 @@
+D:\01.Projects\LeetCodeRepos\LC201810\obj\Debug\LC201810.csprojAssemblyReference.cache
+D:\01.Projects\LeetCodeRepos\LC201810\obj\Debug\LC201810.csproj.CoreCompileInputs.cache
+D:\01.Projects\LeetCodeRepos\LC201810\bin\Debug\LC201810.dll
+D:\01.Projects\LeetCodeRepos\LC201810\bin\Debug\LC201810.pdb
+D:\01.Projects\LeetCodeRepos\LC201810\bin\Debug\LCCommon.dll
+D:\01.Projects\LeetCodeRepos\LC201810\bin\Debug\LCCommon.pdb
+D:\01.Projects\LeetCodeRepos\LC201810\obj\Debug\LC201810.csproj.CopyComplete
+D:\01.Projects\LeetCodeRepos\LC201810\obj\Debug\LC201810.dll
+D:\01.Projects\LeetCodeRepos\LC201810\obj\Debug\LC201810.pdb

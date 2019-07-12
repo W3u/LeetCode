@@ -1,0 +1,10 @@
+D:\01.Projects\LeetCodeRepos\LC201907\bin\Debug\LC201907.exe.config
+D:\01.Projects\LeetCodeRepos\LC201907\bin\Debug\LC201907.exe
+D:\01.Projects\LeetCodeRepos\LC201907\bin\Debug\LC201907.pdb
+D:\01.Projects\LeetCodeRepos\LC201907\obj\Debug\LC201907.csprojAssemblyReference.cache
+D:\01.Projects\LeetCodeRepos\LC201907\obj\Debug\LC201907.csproj.CoreCompileInputs.cache
+D:\01.Projects\LeetCodeRepos\LC201907\obj\Debug\LC201907.exe
+D:\01.Projects\LeetCodeRepos\LC201907\obj\Debug\LC201907.pdb
+D:\01.Projects\LeetCodeRepos\LC201907\bin\Debug\LCCommon.dll
+D:\01.Projects\LeetCodeRepos\LC201907\bin\Debug\LCCommon.pdb
+D:\01.Projects\LeetCodeRepos\LC201907\obj\Debug\LC201907.csproj.CopyComplete
