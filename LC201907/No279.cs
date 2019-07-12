@@ -144,7 +144,7 @@ namespace LC201907
             return dp[n];
         }
 
-        public int NumSquares_DP2(int n)
+        public int NumSquares_DP_V2(int n)
         {
             Dictionary<int, int> dict = new Dictionary<int, int>(n + 1);
             dict.Add(0, 0);
@@ -186,6 +186,25 @@ namespace LC201907
             }
             return dict[n];
         }
+
+
+        public int NumSquares_DP_V2_Optimized(int n)
+        {
+            int[] dp = new int[n + 1];
+
+            int j = 1;
+            while (j <= n)
+            {
+                dp[j] = int.MaxValue;
+                for (int i = 0; i * i <= j; i++)
+                {
+                    dp[j] = Math.Min(dp[j], dp[j - i * i] + 1);
+                }
+            }
+            return dp[n];
+        }
+
+
 
     }
 }
