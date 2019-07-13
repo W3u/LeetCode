@@ -11,7 +11,7 @@ namespace LC201907
         static void Main(string[] args)
         {
             No279 no279 = new No279();
-            no279.NumSquares_DP(55);
+            no279.NumSquares_BFS_V2(12);
         }
     }
 }
