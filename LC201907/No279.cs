@@ -44,7 +44,6 @@ namespace LC201907
             int leastNum = LeastSquareNumber(n, squareList);
             return leastNum;
         }
-
         private int LeastSquareNumber(int n, List<int> squareList)
         {
             if (n <= 0)
@@ -83,6 +82,8 @@ namespace LC201907
 
             return leastList.Min();
         }
+
+
 
         public int NumSquares_BFS(int n)
         {
@@ -123,6 +124,46 @@ namespace LC201907
 
             return height;
         }
+
+        public int NumSquares_BFS_V2(int n)
+        {
+            if (n == 0)
+                return 0;
+
+            int depth = 0;
+            int maxSquare = (int)Math.Floor(Math.Sqrt(n));
+            int[] squares = new int[maxSquare];
+            for (int i = 1; i <= maxSquare; i++)
+            {
+                squares[i - 1] = i * i;
+            }
+
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(0);
+            queue.Enqueue(-1);
+            while (queue.Count() > 0)
+            {
+                depth++;
+                while (queue.Peek() != -1)
+                {
+                    int curNode = queue.Dequeue();
+                    foreach (var item in squares)
+                    {
+                        int nextNode = curNode + item;
+                        queue.Enqueue(nextNode);
+                        if (nextNode == n)
+                            return depth;
+
+                    }
+                }
+                queue.Enqueue(-1);
+                queue.Dequeue();
+            }
+
+            return -1;
+        }
+
+
 
         public int NumSquares_DP(int n)
         {
