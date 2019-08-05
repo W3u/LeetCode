@@ -213,29 +213,122 @@ namespace LC201907
         #endregion
 
 
-        #region Approach #2 Iteration 
+        #region Approach #2 Iteration + Stack
 
 
-        struct StackNode
-        {
-            public int Value;
+        //struct StackNode
+        //{
+        //    public int Value;
 
-            public List<int> UsedIdxes;
+        //    public List<int> UsedIdxes;
 
-            public StackNode(int value)
-            {
-                Value = value;
-                UsedIdxes = new List<int>();
-            }
+        //    public StackNode(int value)
+        //    {
+        //        Value = value;
+        //        UsedIdxes = new List<int>();
+        //    }
 
-            public StackNode(int value, List<int> usedIdxes)
-            {
-                Value = value;
-                UsedIdxes = new List<int>();
-                UsedIdxes.AddRange(usedIdxes);
-            }
-        }
+        //    public StackNode(int value, List<int> usedIdxes)
+        //    {
+        //        Value = value;
+        //        UsedIdxes = new List<int>();
+        //        UsedIdxes.AddRange(usedIdxes);
+        //    }
+        //}
 
+
+        //public bool CanPartition(int[] nums)
+        //{
+        //    Console.Write("Input: [");
+        //    for (int i = 0; i < nums.Length; i++)
+        //    {
+        //        if (i == nums.Length - 1)
+        //            Console.Write("{0}", nums[i]);
+        //        else
+        //            Console.Write("{0}, ", nums[i]);
+        //    }
+        //    Console.WriteLine("]");
+
+        //    int sum = nums.Sum();
+        //    Console.WriteLine("1. Sum of elements is {0}, {1}", sum, sum % 2 == 0 ? "even" : "odd");
+        //    if (sum % 2 == 1)
+        //    {
+        //        Console.WriteLine("The array cannot be partitioned into equal sum subsets");
+        //        return false;
+        //    }
+
+        //    Console.WriteLine("2. Sort the elements in the array...");
+        //    Array.Sort(nums);
+        //    Console.Write("Sorted Array: [");
+        //    for (int i = 0; i < nums.Length; i++)
+        //    {
+        //        if (i == nums.Length - 1)
+        //            Console.Write("{0}", nums[i]);
+        //        else
+        //            Console.Write("{0}, ", nums[i]);
+        //    }
+        //    Console.WriteLine("]");
+
+        //    Stack<StackNode> tmpResults = new Stack<StackNode>();
+        //    StackNode root = new StackNode(sum / 2);
+        //    tmpResults.Push(root);
+
+        //    List<int> failedList = new List<int>();
+
+        //    while (tmpResults.Count > 0)
+        //    {
+        //        StackNode curNode = tmpResults.Pop();
+        //        Console.WriteLine("N = {0}", curNode.Value);
+
+        //        if (failedList.Contains(curNode.Value))
+        //        {
+        //            Console.WriteLine("this item was failed earlier, skipped");
+        //            continue;
+        //        }
+
+        //        Console.Write("Number:\t");
+        //        for (int i = 0; i < nums.Length; i++)
+        //            Console.Write("{0}\t", nums[i]);
+        //        Console.WriteLine();
+        //        Console.Write("Used:\t");
+        //        for (int i = 0; i < nums.Length; i++)
+        //            Console.Write("{0}\t", curNode.UsedIdxes.Contains(i) ? "Y" : "N");
+        //        Console.WriteLine("");
+
+        //        for (int i = 0; i < nums.Length; i++)
+        //        {
+        //            if (curNode.UsedIdxes.Contains(i))
+        //            {
+        //                Console.WriteLine(">> num[{0}] = {1} is used, skipped", i, nums[i]);
+        //                continue;
+        //            }
+        //            if (curNode.Value == nums[i])
+        //            {
+        //                Console.WriteLine(">> n = {0} - {1} = {2}, return true", curNode.Value, nums[i], curNode.Value - nums[i]);
+        //                return true;
+        //            }
+        //            else if (curNode.Value < nums[i])
+        //            {
+        //                Console.WriteLine(">> {0} < {1}, skip this element", curNode.Value, nums[i]);
+        //                break;
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine(">> n = {0} - {1} = {2}", curNode.Value, nums[i], curNode.Value - nums[i]);
+        //                StackNode newNode = new StackNode(curNode.Value - nums[i], curNode.UsedIdxes);
+        //                newNode.UsedIdxes.Add(i);
+        //                tmpResults.Push(newNode);
+        //            }
+        //        }
+        //        failedList.Add(curNode.Value);
+        //    }
+        //    return false;
+        //}
+
+        #endregion
+
+
+        #region Approach # 3 Dynamic Programming
 
         public bool CanPartition(int[] nums)
         {
@@ -257,7 +350,15 @@ namespace LC201907
                 return false;
             }
 
-            Console.WriteLine("2. Sort the elements in the array...");
+            int maxNum = nums.Max();
+            Console.WriteLine("2. The max number is {0}", maxNum);
+            if (maxNum > sum / 2)
+            {
+                Console.WriteLine("The array cannot be partitioned into equal sum subsets");
+                return false;
+            }
+
+            Console.WriteLine("3. Sort the elements in the array...");
             Array.Sort(nums);
             Console.Write("Sorted Array: [");
             for (int i = 0; i < nums.Length; i++)
@@ -269,64 +370,50 @@ namespace LC201907
             }
             Console.WriteLine("]");
 
-            Stack<StackNode> tmpResults = new Stack<StackNode>();
-            StackNode root = new StackNode(sum / 2);
-            tmpResults.Push(root);
 
-            List<int> failedList = new List<int>();
-
-            while (tmpResults.Count > 0)
+            int N = sum / 2;
+            for (int i = nums.Length - 1; i >= 0; i--)
             {
-                StackNode curNode = tmpResults.Pop();
-                Console.WriteLine("N = {0}", curNode.Value);
+                Number[] usedNumTable = InitialUsedTable(nums);
+                int tmpSum = 0;
 
-                if (failedList.Contains(curNode.Value))
+                for (int j = i; j >= 0; j--)
                 {
-                    Console.WriteLine("this item was failed earlier, skipped");
-                    continue;
-                }
-
-                Console.Write("Number:\t");
-                for (int i = 0; i < nums.Length; i++)
-                    Console.Write("{0}\t", nums[i]);
-                Console.WriteLine();
-                Console.Write("Used:\t");
-                for (int i = 0; i < nums.Length; i++)
-                    Console.Write("{0}\t", curNode.UsedIdxes.Contains(i) ? "Y" : "N");
-                Console.WriteLine("");
-
-                for (int i = 0; i < nums.Length; i++)
-                {
-                    if (curNode.UsedIdxes.Contains(i))
-                    {
-                        Console.WriteLine(">> num[{0}] = {1} is used, skipped", i, nums[i]);
+                    Number curNum = usedNumTable[j];
+                    if (curNum.Used)
                         continue;
-                    }
-                    if (curNode.Value == nums[i])
+
+                    if (tmpSum == N)
                     {
-                        Console.WriteLine(">> n = {0} - {1} = {2}, return true", curNode.Value, nums[i], curNode.Value - nums[i]);
                         return true;
                     }
-                    else if (curNode.Value < nums[i])
+                    else if (tmpSum + curNum.Num > N)
                     {
-                        Console.WriteLine(">> {0} < {1}, skip this element", curNode.Value, nums[i]);
-                        break;
+                        continue;
                     }
                     else
                     {
-                        Console.WriteLine(">> n = {0} - {1} = {2}", curNode.Value, nums[i], curNode.Value - nums[i]);
-                        StackNode newNode = new StackNode(curNode.Value - nums[i], curNode.UsedIdxes);
-                        newNode.UsedIdxes.Add(i);
-                        tmpResults.Push(newNode);
+                        tmpSum += curNum.Num;
+                        curNum.Used = true;
                     }
                 }
-                failedList.Add(curNode.Value);
             }
             return false;
         }
 
-        #endregion
+        private Number[] InitialUsedTable(int[] nums)
+        {
+            Number[] numbers = new Number[nums.Length];
+            for (int i = nums.Length - 1; i >= 0; i--)
+            {
+                numbers[i] = new Number(nums[i]);
+            }
 
+            return numbers;
+        }
+
+
+        #endregion
 
     }
 }
