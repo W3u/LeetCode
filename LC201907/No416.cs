@@ -330,89 +330,205 @@ namespace LC201907
 
         #region Approach # 3 Dynamic Programming
 
+        //public bool CanPartition(int[] nums)
+        //{
+        //    Console.Write("Input: [");
+        //    for (int i = 0; i < nums.Length; i++)
+        //    {
+        //        if (i == nums.Length - 1)
+        //            Console.Write("{0}", nums[i]);
+        //        else
+        //            Console.Write("{0}, ", nums[i]);
+        //    }
+        //    Console.WriteLine("]");
+
+        //    int sum = nums.Sum();
+        //    Console.WriteLine("1. Sum of elements is {0}, {1}", sum, sum % 2 == 0 ? "even" : "odd");
+        //    if (sum % 2 == 1)
+        //    {
+        //        Console.WriteLine("The array cannot be partitioned into equal sum subsets");
+        //        return false;
+        //    }
+
+        //    int maxNum = nums.Max();
+        //    Console.WriteLine("2. The max number is {0}", maxNum);
+        //    if (maxNum > sum / 2)
+        //    {
+        //        Console.WriteLine("The array cannot be partitioned into equal sum subsets");
+        //        return false;
+        //    }
+
+        //    Console.WriteLine("3. Sort the elements in the array...");
+        //    Array.Sort(nums);
+        //    Console.Write("Sorted Array: [");
+        //    for (int i = 0; i < nums.Length; i++)
+        //    {
+        //        if (i == nums.Length - 1)
+        //            Console.Write("{0}", nums[i]);
+        //        else
+        //            Console.Write("{0}, ", nums[i]);
+        //    }
+        //    Console.WriteLine("]");
+
+
+        //    int N = sum / 2;
+        //    for (int i = nums.Length - 1; i >= 0; i--)
+        //    {
+        //        Number[] usedNumTable = InitialUsedTable(nums);
+        //        int tmpSum = 0;
+
+        //        for (int j = i; j >= 0; j--)
+        //        {
+        //            Number curNum = usedNumTable[j];
+        //            if (curNum.Used)
+        //                continue;
+
+        //            if (tmpSum == N)
+        //            {
+        //                return true;
+        //            }
+        //            else if (tmpSum + curNum.Num > N)
+        //            {
+        //                continue;
+        //            }
+        //            else
+        //            {
+        //                tmpSum += curNum.Num;
+        //                curNum.Used = true;
+        //            }
+        //        }
+        //    }
+        //    return false;
+        //}
+
+        //private Number[] InitialUsedTable(int[] nums)
+        //{
+        //    Number[] numbers = new Number[nums.Length];
+        //    for (int i = nums.Length - 1; i >= 0; i--)
+        //    {
+        //        numbers[i] = new Number(nums[i]);
+        //    }
+
+        //    return numbers;
+        //}
+
+
+        #endregion
+
+
+        #region Approach #4 DP 2D Array
+        //public bool CanPartition(int[] nums)
+        //{
+        //    int sum = 0;
+        //    for (int i = 0; i < nums.Length; i++)
+        //    {
+        //        sum += nums[i];
+        //    }
+        //    if ((sum & 1) == 1)
+        //    {
+        //        return false;
+        //    }
+        //    sum /= 2;
+
+        //    int n = nums.Length;
+        //    bool[,] dp = new bool[n + 1, sum + 1];
+        //    //for (int i = 0; i < n + 1; i++)
+        //    //    for (int j = 0; j < sum + 1; j++)
+        //    //        dp[i, j] = false;
+
+        //    dp[0, 0] = true;
+        //    for (int i = 1; i < n + 1; i++)
+        //    {
+        //        dp[i, 0] = true;
+        //    }
+        //    //for (int j = 1; j < sum + 1; j++)
+        //    //{
+        //    //    dp[0, j] = false;
+        //    //}
+
+        //    for (int i = 1; i < n + 1; i++)
+        //    {
+        //        for (int j = 1; j < sum + 1; j++)
+        //        {
+        //            dp[i, j] = dp[i - 1, j];
+        //            if (j >= nums[i - 1])
+        //            {
+        //                dp[i, j] = (dp[i, j] || dp[i - 1, j - nums[i - 1]]);
+        //            }
+        //        }
+        //    }
+
+        //    return dp[n, sum];
+        //} 
+        #endregion
+
+        #region Approach #4 DP 1D Array
+
         public bool CanPartition(int[] nums)
         {
-            Console.Write("Input: [");
+            int sum = 0;
             for (int i = 0; i < nums.Length; i++)
-            {
-                if (i == nums.Length - 1)
-                    Console.Write("{0}", nums[i]);
-                else
-                    Console.Write("{0}, ", nums[i]);
-            }
-            Console.WriteLine("]");
+                sum += nums[i];
 
-            int sum = nums.Sum();
-            Console.WriteLine("1. Sum of elements is {0}, {1}", sum, sum % 2 == 0 ? "even" : "odd");
-            if (sum % 2 == 1)
-            {
-                Console.WriteLine("The array cannot be partitioned into equal sum subsets");
+            if ((sum & 1) == 1)
                 return false;
-            }
 
-            int maxNum = nums.Max();
-            Console.WriteLine("2. The max number is {0}", maxNum);
-            if (maxNum > sum / 2)
+            sum /= 2;
+            int n = nums.Length;
+            bool[] dp = new bool[sum + 1];
+            dp[0] = true;
+
+            foreach (int num in nums)
             {
-                Console.WriteLine("The array cannot be partitioned into equal sum subsets");
-                return false;
-            }
-
-            Console.WriteLine("3. Sort the elements in the array...");
-            Array.Sort(nums);
-            Console.Write("Sorted Array: [");
-            for (int i = 0; i < nums.Length; i++)
-            {
-                if (i == nums.Length - 1)
-                    Console.Write("{0}", nums[i]);
-                else
-                    Console.Write("{0}, ", nums[i]);
-            }
-            Console.WriteLine("]");
-
-
-            int N = sum / 2;
-            for (int i = nums.Length - 1; i >= 0; i--)
-            {
-                Number[] usedNumTable = InitialUsedTable(nums);
-                int tmpSum = 0;
-
-                for (int j = i; j >= 0; j--)
+                Console.WriteLine("num = {0}", num);
+                for (int i = sum; i > 0; i--)
                 {
-                    Number curNum = usedNumTable[j];
-                    if (curNum.Used)
-                        continue;
-
-                    if (tmpSum == N)
+                    Console.WriteLine("i = {0}", i);
+                    if (i >= num)
                     {
-                        return true;
-                    }
-                    else if (tmpSum + curNum.Num > N)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        tmpSum += curNum.Num;
-                        curNum.Used = true;
+                        Console.WriteLine("> dp[{0}] = {1}", i, dp[i]);
+                        Console.WriteLine("> dp[i - num] = dp[{0} - {1}] = {2}", i, num, dp[i - num]);
+                        dp[i] = dp[i] || dp[i - num];
+                        Console.WriteLine("=> dp[{0}] = {1}", i, dp[i]);
                     }
                 }
+                Console.WriteLine("=============================================");
             }
-            return false;
+
+            return dp[sum];
         }
 
-        private Number[] InitialUsedTable(int[] nums)
+
+        public bool CanPartitionV2(int[] nums)
         {
-            Number[] numbers = new Number[nums.Length];
-            for (int i = nums.Length - 1; i >= 0; i--)
+            int sum = nums.Sum();
+            if (sum % 2 == 1)
+                return false;
+
+            sum /= 2;
+            if (nums.Max() > sum)
+                return false;
+
+            bool[] dp = new bool[sum + 1];
+            dp[0] = true;
+            for (int i = 0; i < nums.Length; i++)
             {
-                numbers[i] = new Number(nums[i]);
+                Console.WriteLine("num = {0}", nums[i]);
+                for (int s = sum; s > 0; s--)
+                {
+                    Console.WriteLine("s = {0}", s);
+                    if (s >= nums[i])
+                    {
+                        Console.WriteLine("> dp[{0}] = {1}", s, dp[s]);
+                        Console.WriteLine("> dp[s - nums[i]] = dp[{0} - {1}] = {2}", s, nums[i], dp[s - nums[i]]);
+                        dp[s] = dp[s] || dp[s - nums[i]];
+                        Console.WriteLine("=> dp[{0}] = {1}", s, dp[s]);
+                    }
+                }
+                Console.WriteLine("=============================================");
             }
-
-            return numbers;
+            return dp[sum];
         }
-
-
         #endregion
 
     }
